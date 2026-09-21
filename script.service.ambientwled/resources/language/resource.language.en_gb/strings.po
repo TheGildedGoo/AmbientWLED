@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Language: en_GB\n"
+
+msgctxt "#32001"
+msgid "AmbientWLED"
+msgstr ""
+
+msgctxt "#32002"
+msgid "Enable service"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Only while video is playing"
+msgstr ""
+
+msgctxt "#32004"
+msgid "WLED IP or hostname"
+msgstr ""
+
+msgctxt "#32005"
+msgid "WLED HTTP port"
+msgstr ""
+
+msgctxt "#32006"
+msgid "LED count"
+msgstr ""
+
+msgctxt "#32007"
+msgid "RGBW strip (SK6812)"
+msgstr ""
+
+msgctxt "#32008"
+msgid "Brightness cap"
+msgstr ""
+
+msgctxt "#32009"
+msgid "Capture FPS"
+msgstr ""
+
+msgctxt "#32010"
+msgid "Capture width"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Capture height"
+msgstr ""

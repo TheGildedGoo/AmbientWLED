@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <category label="32001">
+    <setting id="enabled" type="bool" label="32002" default="true"/>
+    <setting id="video_only" type="bool" label="32003" default="true"/>
+    <setting id="wled_host" type="text" label="32004" default="192.168.1.50"/>
+    <setting id="wled_port" type="number" label="32005" default="80"/>
+    <setting id="led_count" type="number" label="32006" default="264"/>
+    <setting id="rgbw" type="bool" label="32007" default="true"/>
+    <setting id="brightness" type="slider" label="32008" default="128" range="1,1,255" option="int"/>
+    <setting id="capture_fps" type="number" label="32009" default="20"/>
+    <setting id="capture_width" type="number" label="32010" default="96"/>
+    <setting id="capture_height" type="number" label="32011" default="54"/>
+  </category>
+</settings>
