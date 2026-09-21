@@ -8,7 +8,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT / "repo"
-ADDONS = ["repository.ambientwled", "script.service.ambientwled"]
+ADDONS = [
+    "repository.ambientwled",
+    "script.module.ambientwled",
+    "script.service.ambientwled",
+    "plugin.program.ambientwled",
+]
 SKIP = {".git", "__pycache__", ".DS_Store"}
 
 

@@ -1,0 +1,16 @@
+# AmbientWLED Settings
+msgid ""
+msgstr ""
+"Project-Id-Version: AmbientWLED\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#30000"
+msgid "AmbientWLED Settings"
+msgstr "AmbientWLED Settings"
+
+msgctxt "#30001"
+msgid "Open settings"
+msgstr "Open settings"
