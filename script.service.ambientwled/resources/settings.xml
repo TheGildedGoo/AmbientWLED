@@ -3,41 +3,61 @@
   <section id="ambientwled">
     <category id="connection" label="30000" help="30001">
       <group id="1" label="30002">
-        <setting id="wled_host" type="string" label="30010" help="30011">
+        <setting id="enabled" type="boolean" label="30010" help="30011">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="video_only" type="boolean" label="30012" help="30013">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="wled_host" type="string" label="30014" help="30015">
           <level>0</level>
           <default>192.168.1.50</default>
           <control type="edit" format="string"/>
         </setting>
-        <setting id="test_connection" type="action" label="30012" help="30013">
+        <setting id="wled_port" type="integer" label="30016" help="30017">
+          <level>0</level>
+          <default>80</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>65535</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
+        </setting>
+        <setting id="ddp_port" type="integer" label="30018" help="30019">
+          <level>0</level>
+          <default>4048</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>65535</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
+        </setting>
+        <setting id="test_connection" type="action" label="30020" help="30021">
           <level>0</level>
           <data>RunScript(script.service.ambientwled,test_connection)</data>
           <control type="button" format="action"/>
         </setting>
-        <setting id="enable_on_start" type="boolean" label="30014" help="30015">
-          <level>0</level>
-          <default>true</default>
-          <control type="toggle"/>
-        </setting>
-        <setting id="video_only" type="boolean" label="30016" help="30017">
-          <level>0</level>
-          <default>true</default>
-          <control type="toggle"/>
-        </setting>
       </group>
     </category>
-    <category id="leds" label="30020" help="30021">
-      <group id="2" label="30022">
-        <setting id="led_count" type="integer" label="30023" help="30024">
+    <category id="strip" label="30100" help="30101">
+      <group id="2" label="30102">
+        <setting id="rgbw" type="boolean" label="30110" help="30111">
           <level>0</level>
-          <default>120</default>
-          <constraints>
-            <minimum>1</minimum>
-            <step>1</step>
-            <maximum>2048</maximum>
-          </constraints>
-          <control type="edit" format="integer"/>
+          <default>true</default>
+          <control type="toggle"/>
         </setting>
-        <setting id="color_order" type="string" label="30025" help="30026">
+        <setting id="white_extract" type="boolean" label="30112" help="30113">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="color_order" type="string" label="30114" help="30115">
           <level>0</level>
           <default>GRB</default>
           <constraints>
@@ -52,14 +72,147 @@
           </constraints>
           <control type="spinner" format="string"/>
         </setting>
-        <setting id="rgbw" type="boolean" label="30027" help="30028">
+        <setting id="led_count" type="integer" label="30116" help="30117">
           <level>0</level>
-          <default>true</default>
-          <control type="toggle"/>
+          <default>264</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>2048</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
         </setting>
-        <setting id="brightness_cap" type="integer" label="30029" help="30030">
-          <level>1</level>
-          <default>128</default>
+        <setting id="leds_left" type="integer" label="30118" help="30119">
+          <level>0</level>
+          <default>47</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>1024</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
+        </setting>
+        <setting id="leds_top" type="integer" label="30120" help="30121">
+          <level>0</level>
+          <default>85</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>1024</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
+        </setting>
+        <setting id="leds_right" type="integer" label="30122" help="30123">
+          <level>0</level>
+          <default>47</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>1024</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
+        </setting>
+        <setting id="leds_bottom" type="integer" label="30124" help="30125">
+          <level>0</level>
+          <default>85</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>1024</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
+        </setting>
+        <setting id="start_corner" type="string" label="30126" help="30127">
+          <level>0</level>
+          <default>bottom_left</default>
+          <constraints>
+            <options>
+              <option label="30128">bottom_left</option>
+              <option label="30129">bottom_right</option>
+              <option label="30130">top_left</option>
+              <option label="30131">top_right</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+        </setting>
+        <setting id="direction" type="string" label="30132" help="30133">
+          <level>0</level>
+          <default>cw</default>
+          <constraints>
+            <options>
+              <option label="30134">cw</option>
+              <option label="30135">ccw</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+        </setting>
+      </group>
+    </category>
+    <category id="picture" label="30200" help="30201">
+      <group id="3" label="30202">
+        <setting id="edge_depth_pct" type="integer" label="30210" help="30211">
+          <level>0</level>
+          <default>10</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>40</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="black_threshold" type="integer" label="30212" help="30213">
+          <level>0</level>
+          <default>8</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>64</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="white_suppression" type="integer" label="30214" help="30215">
+          <level>0</level>
+          <default>20</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>100</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="saturation" type="integer" label="30216" help="30217">
+          <level>0</level>
+          <default>120</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>200</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="contrast" type="integer" label="30218" help="30219">
+          <level>0</level>
+          <default>110</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>200</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="gamma" type="integer" label="30220" help="30221">
+          <level>0</level>
+          <default>22</default>
+          <constraints>
+            <minimum>10</minimum>
+            <step>1</step>
+            <maximum>35</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="brightness" type="integer" label="30222" help="30223">
+          <level>0</level>
+          <default>180</default>
           <constraints>
             <minimum>1</minimum>
             <step>1</step>
@@ -67,28 +220,127 @@
           </constraints>
           <control type="slider" format="integer"/>
         </setting>
+        <setting id="smoothing" type="integer" label="30224" help="30225">
+          <level>0</level>
+          <default>40</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>95</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="sync_delay_ms" type="integer" label="30226" help="30227">
+          <level>0</level>
+          <default>40</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>10</step>
+            <maximum>200</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
       </group>
     </category>
-    <category id="week1" label="30040" help="30041">
-      <group id="3" label="30042">
-        <setting id="fake_cycle" type="boolean" label="30043" help="30044">
+    <category id="capture" label="30300" help="30301">
+      <group id="4" label="30302">
+        <setting id="capture_mode" type="string" label="30310" help="30311">
           <level>0</level>
+          <default>auto</default>
+          <constraints>
+            <options>
+              <option label="30312">auto</option>
+              <option label="30313">native</option>
+              <option label="30314">hyperion</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+        </setting>
+        <setting id="capture_fps" type="integer" label="30315" help="30316">
+          <level>0</level>
+          <default>25</default>
+          <constraints>
+            <minimum>15</minimum>
+            <step>1</step>
+            <maximum>30</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="capture_long_edge" type="integer" label="30317" help="30318">
+          <level>1</level>
+          <default>96</default>
+          <constraints>
+            <minimum>32</minimum>
+            <step>2</step>
+            <maximum>160</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="pause_mode" type="string" label="30319" help="30320">
+          <level>0</level>
+          <default>freeze</default>
+          <constraints>
+            <options>
+              <option label="30321">freeze</option>
+              <option label="30322">fade</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+        </setting>
+        <setting id="fail_soft" type="string" label="30323" help="30324">
+          <level>0</level>
+          <default>off</default>
+          <constraints>
+            <options>
+              <option label="30325">off</option>
+              <option label="30326">dim</option>
+              <option label="30327">hold</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+        </setting>
+        <setting id="hyperion_host" type="string" label="30328" help="30329">
+          <level>0</level>
+          <default>127.0.0.1</default>
+          <control type="edit" format="string"/>
+        </setting>
+        <setting id="hyperion_port" type="integer" label="30330" help="30331">
+          <level>0</level>
+          <default>8090</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>65535</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
+        </setting>
+      </group>
+    </category>
+    <category id="debug" label="30400" help="30401">
+      <group id="5" label="30402">
+        <setting id="fake_cycle" type="boolean" label="30410" help="30411">
+          <level>2</level>
           <default>false</default>
           <control type="toggle"/>
         </setting>
-        <setting id="fake_cycle_mode" type="string" label="30045" help="30046">
-          <level>1</level>
+        <setting id="fake_cycle_mode" type="string" label="30412" help="30413">
+          <level>2</level>
           <default>rainbow</default>
           <constraints>
             <options>
-              <option label="30047">rainbow</option>
-              <option label="30048">edge</option>
+              <option label="30414">rainbow</option>
+              <option label="30415">edge</option>
             </options>
           </constraints>
           <control type="spinner" format="string"/>
           <dependencies>
             <dependency type="visible" setting="fake_cycle">true</dependency>
           </dependencies>
+        </setting>
+        <setting id="configured" type="boolean" label="30416" help="30417">
+          <level>3</level>
+          <default>false</default>
+          <control type="toggle"/>
         </setting>
       </group>
     </category>

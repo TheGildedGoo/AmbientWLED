@@ -1,14 +1,20 @@
-"""Color pipeline stubs for Week 2+.
+"""Colour sampling and the worker colour pipe."""
 
-Week 2 will add:
-  - four_edge_mapper: sample L/R/T/B edges from a downsampled frame
-  - mean / p75 aggregators, blackbar detect, gamma 2.2, sat boost
-  - RGBW: W = min(R,G,B) before DDP send
-"""
+from ambientwled.colors.mapper import detect_content_rect, edge_sequence, map_frame
+from ambientwled.colors.pipeline import ColorPipeline, pack_rgbw
+
+__all__ = [
+    "ColorPipeline",
+    "detect_content_rect",
+    "edge_sequence",
+    "map_frame",
+    "pack_rgbw",
+    "trivial_mean_rgb",
+]
 
 
 def trivial_mean_rgb(pixels):
-    """Trivial helper: mean of (r,g,b) tuples. Placeholder for Week 2 tests."""
+    """Mean of (r, g, b) tuples. Kept for the original fixture test."""
     if not pixels:
         return (0, 0, 0)
     n = len(pixels)

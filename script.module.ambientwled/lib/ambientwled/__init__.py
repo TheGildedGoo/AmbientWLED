@@ -1,12 +1,16 @@
-"""AmbientWLED shared library — pure Python, no xbmc imports.
+"""AmbientWLED shared library — pure Python, no xbmc imports."""
 
-Week 1: WLED JSON helpers, DDP UDP sender, fake color cycle.
-Week 2+: 4-edge color mapper (see colors/).
-"""
+__version__ = "0.2.0"
 
-__version__ = "0.1.0"
-
-from ambientwled.wled_json import WledClient, WledError
+from ambientwled.config import Config, DEFAULTS
 from ambientwled.ddp import DdpSender
+from ambientwled.wled_json import WledClient, WledError
 
-__all__ = ["WledClient", "WledError", "DdpSender", "__version__"]
+__all__ = [
+    "Config",
+    "DEFAULTS",
+    "DdpSender",
+    "WledClient",
+    "WledError",
+    "__version__",
+]

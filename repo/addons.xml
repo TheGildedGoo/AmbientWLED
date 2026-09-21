@@ -24,15 +24,15 @@
 </addon>
 <addon id="script.module.ambientwled"
        name="AmbientWLED Library"
-       version="0.1.0"
+       version="0.2.0"
        provider-name="Dylan King">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
   </requires>
   <extension point="xbmc.python.module" library="lib"/>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Shared pure-Python library for AmbientWLED</summary>
-    <description lang="en_GB">WLED JSON helpers, DDP sender, and color utilities used by AmbientWLED service and settings addons. No xbmc imports in the library itself.</description>
+    <summary lang="en_GB">Shared library for AmbientWLED</summary>
+    <description lang="en_GB">WLED JSON, DDP, geometry mapper, colour pipe, and Hyperion client used by AmbientWLED. No xbmc imports in the library itself.</description>
     <platform>all</platform>
     <license>MIT</license>
     <source>https://github.com/TheGildedGoo/AmbientWLED</source>
@@ -43,21 +43,21 @@
 </addon>
 <addon id="script.service.ambientwled"
        name="AmbientWLED"
-       version="0.1.0"
+       version="0.2.0"
        provider-name="Dylan King">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
-    <import addon="script.module.ambientwled" version="0.1.0"/>
+    <import addon="script.module.ambientwled" version="0.2.0"/>
   </requires>
   <extension point="xbmc.service" library="service.py" start="startup"/>
   <extension point="xbmc.python.script" library="run.py"/>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Bias lighting via WLED on your LAN</summary>
-    <description lang="en_GB">AmbientWLED drives a GLEDOPTO GL-C-017WL-D (or any WLED) from Kodi on CoreELEC. Week 1: JSON discover, DDP fake color cycle. Capture and edge mapping come in later weeks. Does not touch HDMI, eARC, or audio paths.</description>
+    <summary lang="en_GB">Bias lighting from Kodi to WLED</summary>
+    <description lang="en_GB">AmbientWLED samples the TV picture on CoreELEC and drives a GLEDOPTO GL-C-017WL-D (or any WLED) over DDP. It does not touch HDMI, eARC, or audio. Enable it from the setup wizard.</description>
     <platform>all</platform>
     <license>MIT</license>
     <source>https://github.com/TheGildedGoo/AmbientWLED</source>
-    <news>Week 1: WLED JSON + DDP + fake cycle stub</news>
+    <news>Picture-to-WLED: DDP RGBW, edge mapper, colour pipe, RenderCapture with Hyperion fallback.</news>
     <assets>
       <icon>resources/icon.png</icon>
     </assets>
@@ -65,19 +65,19 @@
 </addon>
 <addon id="plugin.program.ambientwled"
        name="AmbientWLED Settings"
-       version="0.1.0"
+       version="0.2.0"
        provider-name="Dylan King">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
-    <import addon="script.module.ambientwled" version="0.1.0"/>
-    <import addon="script.service.ambientwled" version="0.1.0"/>
+    <import addon="script.module.ambientwled" version="0.2.0"/>
+    <import addon="script.service.ambientwled" version="0.2.0"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>executable</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Open AmbientWLED settings</summary>
-    <description lang="en_GB">Couch-remote entry point for AmbientWLED. Configure WLED host, LED count, color order, and Week 1 fake cycle.</description>
+    <summary lang="en_GB">AmbientWLED setup wizard</summary>
+    <description lang="en_GB">Remote-only setup for AmbientWLED: WLED address, strip, geometry, picture, and behaviour. Opens the service settings when setup is already done.</description>
     <platform>all</platform>
     <license>MIT</license>
     <source>https://github.com/TheGildedGoo/AmbientWLED</source>

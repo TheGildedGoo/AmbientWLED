@@ -14,137 +14,401 @@ msgid "Connection"
 msgstr "Connection"
 
 msgctxt "#30001"
-msgid "WLED on your home network"
-msgstr "WLED on your home network"
+msgid "WLED on the LAN. This addon never changes HDMI, audio, or Dolby Vision."
+msgstr "WLED on the LAN. This addon never changes HDMI, audio, or Dolby Vision."
 
 msgctxt "#30002"
-msgid "WLED box"
-msgstr "WLED box"
+msgid "WLED"
+msgstr "WLED"
 
 msgctxt "#30010"
-msgid "WLED address"
-msgstr "WLED address"
+msgid "Enable AmbientWLED"
+msgstr "Enable AmbientWLED"
 
 msgctxt "#30011"
-msgid "IP or hostname of the GLEDOPTO / WLED controller (LAN only)"
-msgstr "IP or hostname of the GLEDOPTO / WLED controller (LAN only)"
+msgid "Off until the setup wizard finishes. The service still starts with Kodi and stays idle."
+msgstr "Off until the setup wizard finishes. The service still starts with Kodi and stays idle."
 
 msgctxt "#30012"
-msgid "Test connection"
-msgstr "Test connection"
-
-msgctxt "#30013"
-msgid "Ping WLED /json/info and show the result"
-msgstr "Ping WLED /json/info and show the result"
-
-msgctxt "#30014"
-msgid "Turn on with Kodi"
-msgstr "Turn on with Kodi"
-
-msgctxt "#30015"
-msgid "Start the AmbientWLED service when Kodi starts"
-msgstr "Start the AmbientWLED service when Kodi starts"
-
-msgctxt "#30016"
 msgid "Video only"
 msgstr "Video only"
 
+msgctxt "#30013"
+msgid "Drive the strip only while a video is playing. Home and the screensaver release the lights."
+msgstr "Drive the strip only while a video is playing. Home and the screensaver release the lights."
+
+msgctxt "#30014"
+msgid "WLED address"
+msgstr "WLED address"
+
+msgctxt "#30015"
+msgid "IP or hostname of the GLEDOPTO / WLED controller"
+msgstr "IP or hostname of the GLEDOPTO / WLED controller"
+
+msgctxt "#30016"
+msgid "HTTP port"
+msgstr "HTTP port"
+
 msgctxt "#30017"
-msgid "Only drive LEDs while a video is playing (later weeks)"
-msgstr "Only drive LEDs while a video is playing (later weeks)"
+msgid "WLED JSON port, usually 80"
+msgstr "WLED JSON port, usually 80"
+
+msgctxt "#30018"
+msgid "DDP port"
+msgstr "DDP port"
+
+msgctxt "#30019"
+msgid "WLED DDP UDP port, 4048"
+msgstr "WLED DDP UDP port, 4048"
 
 msgctxt "#30020"
-msgid "LEDs"
-msgstr "LEDs"
+msgid "Test connection"
+msgstr "Test connection"
 
 msgctxt "#30021"
-msgid "Strip layout and limits"
-msgstr "Strip layout and limits"
+msgid "Read WLED info and state, then run a short edge chase"
+msgstr "Read WLED info and state, then run a short edge chase"
 
-msgctxt "#30022"
+msgctxt "#30100"
 msgid "Strip"
 msgstr "Strip"
 
-msgctxt "#30023"
-msgid "LED count"
-msgstr "LED count"
+msgctxt "#30101"
+msgid "264 SK6812 RGBW around the TV is the default. Set the same length in WLED."
+msgstr "264 SK6812 RGBW around the TV is the default. Set the same length in WLED."
 
-msgctxt "#30024"
-msgid "Total LEDs on the strip (match WLED LED Preferences)"
-msgstr "Total LEDs on the strip (match WLED LED Preferences)"
+msgctxt "#30102"
+msgid "Layout"
+msgstr "Layout"
 
-msgctxt "#30025"
-msgid "Colour order"
-msgstr "Colour order"
-
-msgctxt "#30026"
-msgid "Must match WLED colour order (SK6812 often GRB)"
-msgstr "Must match WLED colour order (SK6812 often GRB)"
-
-msgctxt "#30027"
+msgctxt "#30110"
 msgid "RGBW strip (SK6812)"
 msgstr "RGBW strip (SK6812)"
 
-msgctxt "#30028"
-msgid "On: send RGBW over DDP. Off: RGB (WS2812B fallback)"
-msgstr "On: send RGBW over DDP. Off: RGB (WS2812B fallback)"
+msgctxt "#30111"
+msgid "On sends RGBW over DDP. Off is RGB for a WS2812B strip."
+msgstr "On sends RGBW over DDP. Off is RGB for a WS2812B strip."
 
-msgctxt "#30029"
+msgctxt "#30112"
+msgid "White extract"
+msgstr "White extract"
+
+msgctxt "#30113"
+msgid "Off: W = min(R, G, B) and RGB stays. On: that white is subtracted from RGB."
+msgstr "Off: W = min(R, G, B) and RGB stays. On: that white is subtracted from RGB."
+
+msgctxt "#30114"
+msgid "Colour order on the controller"
+msgstr "Colour order on the controller"
+
+msgctxt "#30115"
+msgid "Set this in WLED LED Preferences (SK6812 is usually GRB). AmbientWLED sends RGB."
+msgstr "Set this in WLED LED Preferences (SK6812 is usually GRB). AmbientWLED sends RGB."
+
+msgctxt "#30116"
+msgid "LED count"
+msgstr "LED count"
+
+msgctxt "#30117"
+msgid "Total LEDs. Should equal left + top + right + bottom."
+msgstr "Total LEDs. Should equal left + top + right + bottom."
+
+msgctxt "#30118"
+msgid "Left LEDs"
+msgstr "Left LEDs"
+
+msgctxt "#30119"
+msgid "LEDs down the left side. Default 47."
+msgstr "LEDs down the left side. Default 47."
+
+msgctxt "#30120"
+msgid "Top LEDs"
+msgstr "Top LEDs"
+
+msgctxt "#30121"
+msgid "LEDs across the top. Default 85."
+msgstr "LEDs across the top. Default 85."
+
+msgctxt "#30122"
+msgid "Right LEDs"
+msgstr "Right LEDs"
+
+msgctxt "#30123"
+msgid "LEDs down the right side. Default 47."
+msgstr "LEDs down the right side. Default 47."
+
+msgctxt "#30124"
+msgid "Bottom LEDs"
+msgstr "Bottom LEDs"
+
+msgctxt "#30125"
+msgid "LEDs across the bottom. Default 85."
+msgstr "LEDs across the bottom. Default 85."
+
+msgctxt "#30126"
+msgid "Start corner"
+msgstr "Start corner"
+
+msgctxt "#30127"
+msgid "Where LED 0 sits, looking at the TV."
+msgstr "Where LED 0 sits, looking at the TV."
+
+msgctxt "#30128"
+msgid "Bottom left"
+msgstr "Bottom left"
+
+msgctxt "#30129"
+msgid "Bottom right"
+msgstr "Bottom right"
+
+msgctxt "#30130"
+msgid "Top left"
+msgstr "Top left"
+
+msgctxt "#30131"
+msgid "Top right"
+msgstr "Top right"
+
+msgctxt "#30132"
+msgid "Direction"
+msgstr "Direction"
+
+msgctxt "#30133"
+msgid "Clockwise from the start corner is the default."
+msgstr "Clockwise from the start corner is the default."
+
+msgctxt "#30134"
+msgid "Clockwise"
+msgstr "Clockwise"
+
+msgctxt "#30135"
+msgid "Counter-clockwise"
+msgstr "Counter-clockwise"
+
+msgctxt "#30200"
+msgid "Picture"
+msgstr "Picture"
+
+msgctxt "#30201"
+msgid "Colour pipe. WLED's own limiter stays in charge of current."
+msgstr "Colour pipe. WLED's own limiter stays in charge of current."
+
+msgctxt "#30202"
+msgid "Look"
+msgstr "Look"
+
+msgctxt "#30210"
+msgid "Edge depth %"
+msgstr "Edge depth %"
+
+msgctxt "#30211"
+msgid "How far into the picture each edge is sampled. About 10%."
+msgstr "How far into the picture each edge is sampled. About 10%."
+
+msgctxt "#30212"
+msgid "Black threshold"
+msgstr "Black threshold"
+
+msgctxt "#30213"
+msgid "Pixels darker than this become black on the strip."
+msgstr "Pixels darker than this become black on the strip."
+
+msgctxt "#30214"
+msgid "White suppression"
+msgstr "White suppression"
+
+msgctxt "#30215"
+msgid "Pulls the shared white out of bright pixels. 0 leaves them alone."
+msgstr "Pulls the shared white out of bright pixels. 0 leaves them alone."
+
+msgctxt "#30216"
+msgid "Saturation"
+msgstr "Saturation"
+
+msgctxt "#30217"
+msgid "100 is unchanged. Higher pushes colour."
+msgstr "100 is unchanged. Higher pushes colour."
+
+msgctxt "#30218"
+msgid "Contrast"
+msgstr "Contrast"
+
+msgctxt "#30219"
+msgid "100 is unchanged."
+msgstr "100 is unchanged."
+
+msgctxt "#30220"
+msgid "Gamma"
+msgstr "Gamma"
+
+msgctxt "#30221"
+msgid "Tenths. 22 is gamma 2.2. 24–25 is a bit deeper."
+msgstr "Tenths. 22 is gamma 2.2. 24–25 is a bit deeper."
+
+msgctxt "#30222"
 msgid "Brightness cap"
 msgstr "Brightness cap"
 
-msgctxt "#30030"
-msgid "Keep under controller current limit (~15 A; typical limiter ~2.9 A)"
-msgstr "Keep under controller current limit (~15 A; typical limiter ~2.9 A)"
+msgctxt "#30223"
+msgid "Second cap on top of the WLED limiter (about 2900 mA). Not a replacement for it."
+msgstr "Second cap on top of the WLED limiter (about 2900 mA). Not a replacement for it."
 
-msgctxt "#30040"
-msgid "Week 1 demo"
-msgstr "Week 1 demo"
+msgctxt "#30224"
+msgid "Smoothing"
+msgstr "Smoothing"
 
-msgctxt "#30041"
-msgid "Fake colour cycle — no screen capture yet"
-msgstr "Fake colour cycle — no screen capture yet"
+msgctxt "#30225"
+msgid "How much of the previous frame to keep. Higher is calmer."
+msgstr "How much of the previous frame to keep. Higher is calmer."
 
-msgctxt "#30042"
-msgid "Demo"
-msgstr "Demo"
+msgctxt "#30226"
+msgid "Sync delay (ms)"
+msgstr "Sync delay (ms)"
 
-msgctxt "#30043"
-msgid "Fake cycle (Week 1)"
-msgstr "Fake cycle (Week 1)"
+msgctxt "#30227"
+msgid "Hold the DDP frame so lights meet the picture. 0–200, step 10. Default 40. Does not delay capture."
+msgstr "Hold the DDP frame so lights meet the picture. 0–200, step 10. Default 40. Does not delay capture."
 
-msgctxt "#30044"
-msgid "Send a rainbow / edge chase over DDP to verify wiring"
-msgstr "Send a rainbow / edge chase over DDP to verify wiring"
+msgctxt "#30300"
+msgid "Capture"
+msgstr "Capture"
 
-msgctxt "#30045"
+msgctxt "#30301"
+msgid "Auto tries Kodi, then Hyperion on this box, then gives up quietly."
+msgstr "Auto tries Kodi, then Hyperion on this box, then gives up quietly."
+
+msgctxt "#30302"
+msgid "Source"
+msgstr "Source"
+
+msgctxt "#30310"
+msgid "Capture mode"
+msgstr "Capture mode"
+
+msgctxt "#30311"
+msgid "Auto: RenderCapture, then Hyperion if the picture stays black. Fake cycle is not a capture mode."
+msgstr "Auto: RenderCapture, then Hyperion if the picture stays black. Fake cycle is not a capture mode."
+
+msgctxt "#30312"
+msgid "Auto"
+msgstr "Auto"
+
+msgctxt "#30313"
+msgid "Kodi only"
+msgstr "Kodi only"
+
+msgctxt "#30314"
+msgid "Hyperion only"
+msgstr "Hyperion only"
+
+msgctxt "#30315"
+msgid "Capture frame rate"
+msgstr "Capture frame rate"
+
+msgctxt "#30316"
+msgid "20–25 is the target. The service drops to 15 if processing runs long."
+msgstr "20–25 is the target. The service drops to 15 if processing runs long."
+
+msgctxt "#30317"
+msgid "Capture long edge"
+msgstr "Capture long edge"
+
+msgctxt "#30318"
+msgid "Downscale long edge in pixels. Default 96."
+msgstr "Downscale long edge in pixels. Default 96."
+
+msgctxt "#30319"
+msgid "Pause"
+msgstr "Pause"
+
+msgctxt "#30320"
+msgid "Freeze holds the last colours. Fade dims them. Stop and the screensaver release live."
+msgstr "Freeze holds the last colours. Fade dims them. Stop and the screensaver release live."
+
+msgctxt "#30321"
+msgid "Freeze"
+msgstr "Freeze"
+
+msgctxt "#30322"
+msgid "Fade"
+msgstr "Fade"
+
+msgctxt "#30323"
+msgid "If capture fails"
+msgstr "If capture fails"
+
+msgctxt "#30324"
+msgid "Off releases the strip. Dim holds a low warm level. Hold keeps the last frame."
+msgstr "Off releases the strip. Dim holds a low warm level. Hold keeps the last frame."
+
+msgctxt "#30325"
+msgid "Off"
+msgstr "Off"
+
+msgctxt "#30326"
+msgid "Dim"
+msgstr "Dim"
+
+msgctxt "#30327"
+msgid "Hold"
+msgstr "Hold"
+
+msgctxt "#30328"
+msgid "Hyperion address"
+msgstr "Hyperion address"
+
+msgctxt "#30329"
+msgid "service.hyperion.ng on this CoreELEC box. Usually 127.0.0.1."
+msgstr "service.hyperion.ng on this CoreELEC box. Usually 127.0.0.1."
+
+msgctxt "#30330"
+msgid "Hyperion port"
+msgstr "Hyperion port"
+
+msgctxt "#30331"
+msgid "Hyperion JSON / WebSocket port, usually 8090"
+msgstr "Hyperion JSON / WebSocket port, usually 8090"
+
+msgctxt "#30400"
+msgid "Debug"
+msgstr "Debug"
+
+msgctxt "#30401"
+msgid "The colour cycle ignores the TV picture. Leave it off."
+msgstr "The colour cycle ignores the TV picture. Leave it off."
+
+msgctxt "#30402"
+msgid "Debug"
+msgstr "Debug"
+
+msgctxt "#30410"
+msgid "Fake colour cycle"
+msgstr "Fake colour cycle"
+
+msgctxt "#30411"
+msgid "Debug only. Sends a rainbow or edge chase instead of the TV picture."
+msgstr "Debug only. Sends a rainbow or edge chase instead of the TV picture."
+
+msgctxt "#30412"
 msgid "Cycle style"
 msgstr "Cycle style"
 
-msgctxt "#30046"
-msgid "Rainbow strip or four-edge chase"
-msgstr "Rainbow strip or four-edge chase"
+msgctxt "#30413"
+msgid "Rainbow or a four-edge chase"
+msgstr "Rainbow or a four-edge chase"
 
-msgctxt "#30047"
+msgctxt "#30414"
 msgid "Rainbow"
 msgstr "Rainbow"
 
-msgctxt "#30048"
+msgctxt "#30415"
 msgid "Edge chase"
 msgstr "Edge chase"
 
-msgctxt "#30100"
-msgid "AmbientWLED"
-msgstr "AmbientWLED"
+msgctxt "#30416"
+msgid "Setup completed"
+msgstr "Setup completed"
 
-msgctxt "#30101"
-msgid "Connected to {0} ({1} LEDs)"
-msgstr "Connected to {0} ({1} LEDs)"
-
-msgctxt "#30102"
-msgid "Cannot reach WLED at {0}"
-msgstr "Cannot reach WLED at {0}"
-
-msgctxt "#30103"
-msgid "OK"
-msgstr "OK"
+msgctxt "#30417"
+msgid "Set by the wizard. Turn off to see the wizard again next time you open AmbientWLED."
+msgstr "Set by the wizard. Turn off to see the wizard again next time you open AmbientWLED."

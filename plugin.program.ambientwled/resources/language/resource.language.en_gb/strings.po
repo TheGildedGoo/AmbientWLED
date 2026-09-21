@@ -8,9 +8,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgctxt "#30000"
-msgid "AmbientWLED Settings"
-msgstr "AmbientWLED Settings"
+msgid "AmbientWLED"
+msgstr "AmbientWLED"
 
 msgctxt "#30001"
-msgid "Open settings"
-msgstr "Open settings"
+msgid "Setup wizard"
+msgstr "Setup wizard"
+
+msgctxt "#30002"
+msgid "Settings"
+msgstr "Settings"

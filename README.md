@@ -1,135 +1,128 @@
 # AmbientWLED
 
-Bias lighting for **Kodi on CoreELEC** → **WLED** on the LAN.  
-Working title: **AmbientWLED**. Original code — not a ScreenGlow/SceneGlow clone.
+Bias lighting for **Kodi on CoreELEC** → **WLED** on the LAN.
 
-**Week 1:** WLED JSON discover + DDP sender + fake colour cycle (no screen capture yet).
+A couch setup: install the repo, run the wizard with the remote, and the strip follows the picture while video plays. Original code. It does not touch HDMI, Dolby Vision, or audio.
 
-Kodi / CoreELEC addon that will sample video edges (later weeks) and drive a WLED controller (GLEDOPTO GL-C-017WL-D and similar) over DDP.
-
-## Hardware (Dylan’s rig)
+## Hardware
 
 | Role | Part |
 |------|------|
-| Box | **Ugoos AM9 Pro** — Amlogic S905X5-J · **CoreELEC 22 Amlogic-NO** |
-| TV | **LG C2** — do **not** touch eARC / TrueHD / Sonos path |
-| Controller | **GLEDOPTO GL-C-017WL-D** (ESP32, 4 data outs, WLED firmware) |
-| Strip | **SK6812 RGBW** (fallback: WS2812B RGB) |
+| Box | **Ugoos AM9 Pro** — Amlogic S905X5-J · **CoreELEC 22 Amlogic-NO** · Kodi 21/22 |
+| TV | **LG C2** |
+| Audio | **Sonos Arc Ultra** on the TV **eARC** port |
+| Controller | **GLEDOPTO GL-C-017WL-D** (WLED, Ethernet or Wi-Fi) |
+| Strip | **SK6812 RGBW**, 264 LEDs. WS2812B RGB is a setting |
 
-No HDMI splitter, no capture card, no phone-home. Ethernet on the AM9 preferred; WLED may use Wi‑Fi.
+Leave the Arc Ultra on the TV eARC port. Do not change HDMI, audio passthrough, or Dolby Vision to make the lights work. AmbientWLED only reads a small picture and sends LAN packets.
 
-## Wiring the GL-C-017WL-D
+## Install on the AM9 (do this first)
 
-1. Power the controller from a suitable 5 V supply. The board is rated around **15 A** total — size the PSU for your LED count and brightness.
-2. Data outs are typically GPIOs **16 / 4 / 2 / 1** (confirm silkscreen / WLED LED Preferences). Week 1 treats the strip as **one logical loop** over DDP; 4-channel layout wizard is later.
-3. Connect SK6812 (or WS2812B) data + 5 V + GND. Common ground with the PSU.
-4. For long runs, inject 5 V at the far end; keep voltage drop in mind.
+Install the **repository zip** before the service zip. Kodi then pulls the library, the service, and the wizard from that repo, and the zip URL stays valid when versions move.
 
-### WLED LED Preferences (suggested Week 1)
-
-- **LED type:** SK6812 RGBW (or WS2812 for RGB fallback)
-- **Colour order:** usually **GRB** for SK6812 — match the addon setting
-- **Length:** total LED count (same as addon “LED count”)
-- **DDP:** enabled (UDP **4048**) — AmbientWLED’s primary path  
-  *(DRGB/DRGBW on 21324 is stubbed for later)*
-- **Current / brightness limiter:** stay well under **15 A**. Many living-room setups use a software limiter around **~2.9 A** — start conservative; the addon brightness cap defaults mid-range.
-
-## Network
-
-1. Put the GLEDOPTO on the same LAN as the AM9 (2.4 GHz Wi‑Fi is fine for WLED).
-2. Note the controller IP (router DHCP list or WLED AP setup).
-3. In AmbientWLED settings: set **WLED address**, **Test connection**, set LED count / colour order / RGBW.
-4. Enable **Fake cycle (Week 1)** to verify DDP without video capture.
-
-## Repo layout
-
-- `script.module.ambientwled/` shared pure-Python lib (WLED JSON, DDP, fake cycle)
-- `script.service.ambientwled/` background service (install this on CoreELEC)
-- `plugin.program.ambientwled/` Program add-ons → opens settings
-- `repository.ambientwled/` Kodi repository addon (install this zip once)
-- `repo/` generated Kodi index and zips (created by `tools/build_repo.py` or the GitHub Action)
-- `tools/build_repo.py` packs zips and writes `addons.xml` + `addons.xml.md5`
-
-## Install on CoreELEC (repository zip)
-
-1. Settings → System → Add-ons → Unknown sources: On
+1. Settings → System → Add-ons → Unknown sources: **On**
 2. Download [repository.ambientwled-1.0.0.zip](https://raw.githubusercontent.com/TheGildedGoo/AmbientWLED/main/repo/zips/repository.ambientwled/repository.ambientwled-1.0.0.zip)
-3. Add-ons → Install from zip file → that zip
-4. Add-ons → Install from repository → AmbientWLED Repo → AmbientWLED
+3. Add-ons → **Install from zip file** → that zip
+4. Add-ons → **Install from repository** → **AmbientWLED Repo** → **Program add-ons** → **AmbientWLED Settings**
 
-If the zip link 404s, the GitHub Action has not published `repo/` yet. Run:
+That program addon depends on the service, and the service depends on the library, so one install brings up all three. Open **AmbientWLED Settings**. The first time, the setup wizard runs.
+
+The service starts with Kodi and stays idle until the wizard (or the Enable setting) turns it on.
+
+### If you are copying zips by hand
+
+Install in this order, or Kodi will refuse a dependency:
+
+1. `script.module.ambientwled`
+2. `script.service.ambientwled`
+3. `plugin.program.ambientwled`
+
+## Wizard
+
+Seven steps, remote only:
+
+1. Welcome
+2. WLED IP, HTTP port, DDP port, **Test connection** (info dialog, then a short edge chase)
+3. RGBW or RGB, LED count (264)
+4. Left / top / right / bottom, with the live sum, start corner, direction, edge depth, and an edge chase
+5. Picture sliders, plus a solid and a rainbow preview
+6. Video only, capture mode, pause, and what to do if capture fails
+7. Enable the service
+
+You can run the chase in the wizard before capture has ever worked.
+
+## Wizard defaults (this 264 SK6812 layout)
+
+| Setting | Default |
+|---------|---------|
+| Strip | RGBW (SK6812). White extract **off** (W = min(R, G, B), RGB kept) |
+| LEDs | 264 total · left **47** · top **85** · right **47** · bottom **85** |
+| Order | Start **bottom left**, **clockwise** |
+| Edge depth | 10% |
+| Gamma | 2.2 (setting `22`) |
+| Brightness cap | 180 (second cap; see WLED limiter below) |
+| Sync delay | **40 ms** (0–200, step 10). Delays the DDP send, not capture |
+| Capture | **auto**, 25 fps, long edge 96 |
+| Pause | freeze |
+| Video only | on |
+| If capture fails | off (release the strip, log once) |
+| Fake colour cycle | **off** (debug only) |
+
+Colour order **GRB** is a reminder for the WLED controller. DDP itself is sent as RGB / RGBW.
+
+## WLED on the GL-C-017WL-D
+
+In LED Preferences:
+
+- **LED type:** SK6812 RGBW (or WS2812 if you turned RGBW off here)
+- **Colour order:** GRB for a typical SK6812 — match the strip, not this addon
+- **Length:** 264 on one output, or outputs that add up to 264. AmbientWLED sends one DDP stream in the wizard order
+- **DDP:** on, UDP **4048**
+- **Brightness limiter:** about **2900 mA**. That limiter is the current limit. The addon brightness slider is only a second cap and does not replace it
+- 2.4 GHz Wi-Fi is enough for the controller. Ethernet on the AM9 is the better side of the link
+
+Test connection reads `/json/info` and `/json/state`, shows a dialog, then runs a two-second edge chase. Stop, Home, and the screensaver POST `{"live": false}` so WLED can take the strip back.
+
+## Capture
+
+**Auto** (the default):
+
+1. Kodi `RenderCapture`, about 96 px on the long edge, 20–25 fps, BGRA, on a worker (queue depth 1). If the colour pipe averages over 8 ms it drops to 15 fps.
+2. After playback has been going ~300 ms, 12 frames are checked. If at least three quarters are near-black, native capture is treated as failed. That is the usual result for hardware-decoded video on this box.
+3. **Hyperion.** Install CoreELEC **`service.hyperion.ng`** from the Amlogic-no repo that matches your nightly. AmbientWLED talks to `127.0.0.1:8090` (JSON, WebSocket if it answers). It turns the Hyperion **LED device off** and the **grabber on**, then maps those frames itself and sends DDP. It does not open the Amlogic grabber device.
+4. If both fail, it logs once and stops. It does not spin or take Kodi down. Dim and Hold are optional in settings.
+
+Do not also point Hyperion’s LED device at the same WLED. One sender.
+
+The fake colour cycle is under Debug and stays off. It is not the live path.
+
+## What it will not do
+
+- No HDMI splitter, no capture card, no grabber of its own
+- No change to eARC, TrueHD, Atmos, or Dolby Vision
+- No phone-home. Traffic is the WLED on your LAN and, only if you use that path, Hyperion on localhost
+
+## Develop
 
 ```bash
+python3 -m pip install -r requirements-dev.txt
+python3 -m pytest
 python3 tools/build_repo.py
-git add repo && git commit -m "Build Kodi repo" && git push
 ```
 
-The repository must be **public** (or you host `repo/` on GitHub Pages) or CoreELEC cannot fetch raw GitHub URLs.
+The library in `script.module.ambientwled/lib` does not import `xbmc`.
 
-## Install from this repo (local scaffold)
+## Layout
 
-Kodi 21/22 compatible addon tree:
-
-```
-script.module.ambientwled/     # shared pure-Python lib
-script.service.ambientwled/    # background service
-plugin.program.ambientwled/    # Program add-ons → opens settings
-```
-
-**From this repo (local scaffold):**
-
-```bash
-cd /path/to/AmbientWLED
-zip -r ambientwled-week1.zip \
-  script.module.ambientwled \
-  script.service.ambientwled \
-  plugin.program.ambientwled \
-  -x '*/__pycache__/*' '*.pyc'
-```
-
-On the AM9 (CoreELEC):
-
-1. Copy the zip to the box (SMB, USB, or `scp`).
-2. Kodi → **Add-ons** → **Install from zip file** → install **module**, then **service**, then **plugin** (or one multi-addon zip if you packaged that way).
-3. Enable the service if prompted. Open **Program add-ons → AmbientWLED Settings**.
-
-Settings live on `script.service.ambientwled`. The program plugin only opens that page (couch remote).
-
-## Configure
-
-Add-ons → My add-ons → Services → AmbientWLED → Settings  
-(or Program add-ons → AmbientWLED Settings)
-
-- WLED IP from the WLED app
-- LED count and colour order matching the controller
-- Enable **Fake cycle (Week 1)** to verify DDP without video capture
-- Enable only during video playback (video-only)
-
-Keep the Sonos Arc Ultra on the TV eARC port. This addon never touches HDMI.
-
-## Develop / test without Kodi
-
-```bash
-cd /path/to/AmbientWLED
-python -m pip install pytest
-python -m pytest
-```
-
-The library under `script.module.ambientwled/lib` has **no `xbmc` imports**.
-
-## What Week 1 does / does not do
-
-| Does | Does not |
-|------|----------|
-| GET `/json/info`, brightness / on / live helpers | Screen capture (`RenderCapture`) |
-| DDP UDP 4048 RGB + RGBW | Hyperion bridge |
-| Fake rainbow / edge chase | Blackbar detect, 4-edge mapper |
-| Service + settings + playback **log stubs** | Touch HDMI / eARC / TrueHD / Sonos |
+- `script.module.ambientwled/` shared library (DDP, JSON, mapper, colour pipe, Hyperion client)
+- `script.service.ambientwled/` background service
+- `plugin.program.ambientwled/` wizard
+- `repository.ambientwled/` the Kodi repository addon
+- `repo/` index and zips from `tools/build_repo.py`
+- `.github/workflows/kodi-repo.yml` rebuilds `repo/` on main
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
-
-## Repo
+MIT. See [LICENSE](LICENSE).
 
 https://github.com/TheGildedGoo/AmbientWLED

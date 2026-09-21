@@ -42,6 +42,8 @@ class TestWledJson(unittest.TestCase):
         info = {"name": "TV-bias", "ver": "0.14.0", "leds": {"count": 150}}
 
         def fake_urlopen(req, timeout=None):
+            if req.full_url.endswith("/json/state"):
+                return _FakeResp({"on": True, "bri": 90, "live": False})
             self.assertIn("/json/info", req.full_url)
             return _FakeResp(info)
 
@@ -54,6 +56,8 @@ class TestWledJson(unittest.TestCase):
             summary = c.test_connection()
             self.assertTrue(summary["ok"])
             self.assertEqual(summary["led_count"], 150)
+            self.assertEqual(summary["bri"], 90)
+            self.assertFalse(summary["live"])
         finally:
             urllib.request.urlopen = orig
 
