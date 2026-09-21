@@ -2,20 +2,22 @@
 <addon id="script.service.ambientwled"
        name="AmbientWLED"
        version="0.1.0"
-       provider-name="TheGildedGoo">
+       provider-name="Dylan King">
   <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
+    <import addon="xbmc.python" version="3.0.1"/>
+    <import addon="script.module.ambientwled" version="0.1.0"/>
   </requires>
   <extension point="xbmc.service" library="service.py" start="startup"/>
+  <extension point="xbmc.python.script" library="run.py"/>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Drive WLED strips from Kodi video edges</summary>
-    <description lang="en_GB">Samples the Kodi framebuffer and sends edge colors to a WLED controller over DDP. Built for CoreELEC on Amlogic boxes such as the Ugoos AM9 Pro. Does not sit in the HDMI path.</description>
+    <summary lang="en_GB">Bias lighting via WLED on your LAN</summary>
+    <description lang="en_GB">AmbientWLED drives a GLEDOPTO GL-C-017WL-D (or any WLED) from Kodi on CoreELEC. Week 1: JSON discover, DDP fake color cycle. Capture and edge mapping come in later weeks. Does not touch HDMI, eARC, or audio paths.</description>
     <platform>all</platform>
     <license>MIT</license>
     <source>https://github.com/TheGildedGoo/AmbientWLED</source>
-    <news>0.1.0 - Initial service, WLED JSON probe, DDP sender, RenderCapture sampler.</news>
+    <news>Week 1: WLED JSON + DDP + fake cycle stub</news>
     <assets>
-      <icon>icon.png</icon>
+      <icon>resources/icon.png</icon>
     </assets>
   </extension>
 </addon>

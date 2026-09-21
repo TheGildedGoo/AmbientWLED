@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.DS_Store
+# Local packaging zips; keep committed Kodi repo artifacts
+*.zip
+!repo/zips/**/*.zip

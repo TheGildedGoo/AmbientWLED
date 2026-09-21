@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.program.ambientwled"
+       name="AmbientWLED Settings"
+       version="0.1.0"
+       provider-name="Dylan King">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1"/>
+    <import addon="script.module.ambientwled" version="0.1.0"/>
+    <import addon="script.service.ambientwled" version="0.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Open AmbientWLED settings</summary>
+    <description lang="en_GB">Couch-remote entry point for AmbientWLED. Configure WLED host, LED count, color order, and Week 1 fake cycle.</description>
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/TheGildedGoo/AmbientWLED</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon>

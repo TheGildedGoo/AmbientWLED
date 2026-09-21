@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "script.service.ambientwled/**"
+      - "script.module.ambientwled/**"
+      - "plugin.program.ambientwled/**"
       - "repository.ambientwled/**"
       - "tools/build_repo.py"
       - ".github/workflows/kodi-repo.yml"

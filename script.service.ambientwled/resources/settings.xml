@@ -1,15 +1,96 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<settings>
-  <category label="32001">
-    <setting id="enabled" type="bool" label="32002" default="true"/>
-    <setting id="video_only" type="bool" label="32003" default="true"/>
-    <setting id="wled_host" type="text" label="32004" default="192.168.1.50"/>
-    <setting id="wled_port" type="number" label="32005" default="80"/>
-    <setting id="led_count" type="number" label="32006" default="264"/>
-    <setting id="rgbw" type="bool" label="32007" default="true"/>
-    <setting id="brightness" type="slider" label="32008" default="128" range="1,1,255" option="int"/>
-    <setting id="capture_fps" type="number" label="32009" default="20"/>
-    <setting id="capture_width" type="number" label="32010" default="96"/>
-    <setting id="capture_height" type="number" label="32011" default="54"/>
-  </category>
+<settings version="1">
+  <section id="ambientwled">
+    <category id="connection" label="30000" help="30001">
+      <group id="1" label="30002">
+        <setting id="wled_host" type="string" label="30010" help="30011">
+          <level>0</level>
+          <default>192.168.1.50</default>
+          <control type="edit" format="string"/>
+        </setting>
+        <setting id="test_connection" type="action" label="30012" help="30013">
+          <level>0</level>
+          <data>RunScript(script.service.ambientwled,test_connection)</data>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="enable_on_start" type="boolean" label="30014" help="30015">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="video_only" type="boolean" label="30016" help="30017">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+      </group>
+    </category>
+    <category id="leds" label="30020" help="30021">
+      <group id="2" label="30022">
+        <setting id="led_count" type="integer" label="30023" help="30024">
+          <level>0</level>
+          <default>120</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>2048</maximum>
+          </constraints>
+          <control type="edit" format="integer"/>
+        </setting>
+        <setting id="color_order" type="string" label="30025" help="30026">
+          <level>0</level>
+          <default>GRB</default>
+          <constraints>
+            <options>
+              <option label="GRB">GRB</option>
+              <option label="RGB">RGB</option>
+              <option label="BRG">BRG</option>
+              <option label="RBG">RBG</option>
+              <option label="GBR">GBR</option>
+              <option label="BGR">BGR</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+        </setting>
+        <setting id="rgbw" type="boolean" label="30027" help="30028">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="brightness_cap" type="integer" label="30029" help="30030">
+          <level>1</level>
+          <default>128</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>255</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+      </group>
+    </category>
+    <category id="week1" label="30040" help="30041">
+      <group id="3" label="30042">
+        <setting id="fake_cycle" type="boolean" label="30043" help="30044">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="fake_cycle_mode" type="string" label="30045" help="30046">
+          <level>1</level>
+          <default>rainbow</default>
+          <constraints>
+            <options>
+              <option label="30047">rainbow</option>
+              <option label="30048">edge</option>
+            </options>
+          </constraints>
+          <control type="spinner" format="string"/>
+          <dependencies>
+            <dependency type="visible" setting="fake_cycle">true</dependency>
+          </dependencies>
+        </setting>
+      </group>
+    </category>
+  </section>
 </settings>
