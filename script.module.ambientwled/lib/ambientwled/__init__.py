@@ -1,6 +1,6 @@
 """AmbientWLED shared library — pure Python, no xbmc imports."""
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 from ambientwled.config import Config, DEFAULTS
 from ambientwled.ddp import DdpSender

@@ -11,6 +11,7 @@ from ambientwled.wizard import (  # noqa: E402
     WizardActions,
     WizardStore,
     WizardUI,
+    _step_picture,
     _step_wled,
     run_wizard,
 )
@@ -102,6 +103,41 @@ class TestWizard(unittest.TestCase):
         self.assertEqual(_step_wled(ui, WizardStore(), actions), "next")
         self.assertEqual(actions.tested, 1)
         self.assertIn("stub ok", ui.messages)
+
+    def test_picture_step_launches_calibrate_sync(self):
+        class UI(AutoUI):
+            def __init__(self):
+                AutoUI.__init__(self)
+                self.calls = 0
+                self.options = []
+
+            def select(self, title, options):
+                self.calls += 1
+                if self.calls == 1:
+                    self.options = list(options)
+                    for index, label in enumerate(options):
+                        if label.lower().startswith("calibrate"):
+                            return index
+                for index, label in enumerate(options):
+                    if label.lower().startswith("next"):
+                        return index
+                return -1
+
+        class Actions(WizardActions):
+            def __init__(self):
+                self.calibrated = 0
+
+            def calibrate_sync(self, store, ui):
+                self.calibrated += 1
+                store.set("sync_delay_ms", 80)
+
+        store = WizardStore()
+        ui = UI()
+        actions = Actions()
+        self.assertEqual(_step_picture(ui, store, actions), "next")
+        self.assertEqual(actions.calibrated, 1)
+        self.assertEqual(store.get("sync_delay_ms"), 80)
+        self.assertIn("Calibrate sync", ui.options)
 
     def test_cancel_does_not_enable(self):
         class CancelUI(AutoUI):

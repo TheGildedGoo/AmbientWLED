@@ -178,6 +178,34 @@ class TestServiceMonitor(unittest.TestCase):
         player.onPlayBackStopped()
         self.assertFalse(app.streaming)
 
+    def test_calibrate_script_arg_routes(self):
+        _install_stubs()
+        inserted = False
+        if SERVICE_DIR not in sys.path:
+            sys.path.insert(0, SERVICE_DIR)
+            inserted = True
+        sys.modules.pop("run", None)
+        sys.modules.pop("service", None)
+        try:
+            import service as svc
+
+            called = []
+            svc.calibrate_sync = lambda: called.append("calibrate")
+            import run
+
+            argv = sys.argv
+            sys.argv = ["run.py", "Calibrate_Sync"]
+            try:
+                run.main()
+            finally:
+                sys.argv = argv
+            self.assertEqual(called, ["calibrate"])
+        finally:
+            sys.modules.pop("run", None)
+            sys.modules.pop("service", None)
+            if inserted and SERVICE_DIR in sys.path:
+                sys.path.remove(SERVICE_DIR)
+
     def test_plugin_entry_is_stub_safe(self):
         _install_stubs()
         path = os.path.abspath(
