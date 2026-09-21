@@ -57,6 +57,9 @@ class WizardActions:
     def rainbow(self, store: WizardStore, ui: "WizardUI") -> None:
         ui.notify("AmbientWLED", "Rainbow preview skipped")
 
+    def calibrate_sync(self, store: WizardStore, ui: "WizardUI") -> None:
+        ui.notify("AmbientWLED", "Sync calibration skipped")
+
 
 class WizardUI:
     def ok(self, title: str, message: str) -> None:
@@ -318,7 +321,7 @@ def _step_picture(ui: WizardUI, store: WizardStore, actions: WizardActions) -> s
     ]
     while True:
         options = ["%s (%s)" % (label, store.get(key)) for key, label, _s, _a, _b in knobs]
-        options.extend(["Solid preview", "Rainbow preview", "Next", "Back"])
+        options.extend(["Calibrate sync", "Solid preview", "Rainbow preview", "Next", "Back"])
         choice = ui.select("Picture", options)
         if choice is None or choice < 0:
             return "back"
@@ -327,15 +330,20 @@ def _step_picture(ui: WizardUI, store: WizardStore, actions: WizardActions) -> s
             _adjust(ui, store, key, label, step, low, high)
         elif choice == len(knobs):
             try:
+                actions.calibrate_sync(store, ui)
+            except Exception as exc:
+                ui.ok("AmbientWLED", "Calibrate sync failed: %s" % exc)
+        elif choice == len(knobs) + 1:
+            try:
                 actions.solid(store, ui)
             except Exception as exc:
                 ui.ok("AmbientWLED", "Solid preview failed: %s" % exc)
-        elif choice == len(knobs) + 1:
+        elif choice == len(knobs) + 2:
             try:
                 actions.rainbow(store, ui)
             except Exception as exc:
                 ui.ok("AmbientWLED", "Rainbow failed: %s" % exc)
-        elif choice == len(knobs) + 2:
+        elif choice == len(knobs) + 3:
             delay = int(store.get("sync_delay_ms") or 0)
             store.set("sync_delay_ms", max(0, min(200, delay - (delay % 10))))
             return "next"

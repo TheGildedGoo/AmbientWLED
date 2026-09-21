@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Script entry for settings actions (Test connection)."""
+"""Script entry for settings actions (Test connection, Calibrate sync)."""
 from __future__ import annotations
 
 import sys
@@ -17,6 +17,9 @@ def main():
         return
     if args[0] == "test_connection":
         svc.test_connection()
+        return
+    if args[0] == "calibrate_sync":
+        svc.calibrate_sync()
         return
     xbmc.log("[AmbientWLED] unknown script arg: %s" % args, xbmc.LOGWARNING)
 

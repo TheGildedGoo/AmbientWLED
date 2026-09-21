@@ -13,6 +13,7 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 
+from ambientwled.calibrate import CALIBRATE_PROPERTY
 from ambientwled.capture.black_detect import BlackDetector
 from ambientwled.capture.hyperion import HyperionClient, HyperionError, HyperionSource
 from ambientwled.capture.native import capture_size, recommend_fps
@@ -34,6 +35,14 @@ def _log(msg, level=None):
     if level is None:
         level = xbmc.LOGINFO
     xbmc.log("[AmbientWLED] %s" % msg, level)
+
+
+def calibration_active():
+    """True while the sync-calibration overlay owns the strip."""
+    try:
+        return xbmcgui.Window(10000).getProperty(CALIBRATE_PROPERTY) == "1"
+    except Exception:
+        return False
 
 
 def load_config(addon=None):
@@ -117,6 +126,8 @@ class ServiceApp(object):
         self.config = load_config(self.addon)
         if alive:
             self.stop_stream()
+        if calibration_active():
+            return
         self._maybe_start(playing)
 
     def _maybe_start(self, is_video):
@@ -144,6 +155,8 @@ class ServiceApp(object):
             if cfg.video_only and not is_video and not cfg.fake_cycle:
                 return
             if cfg.video_only and not is_video and cfg.fake_cycle:
+                return
+            if calibration_active():
                 return
             self._stop.clear()
             self._pause.clear()
@@ -527,8 +540,18 @@ def run_service():
         playing = False
     app._is_video = playing
     app._maybe_start(playing)
+    was_calibrating = False
     while not monitor.abortRequested():
-        if monitor.waitForAbort(0.5):
+        active = calibration_active()
+        if active:
+            was_calibrating = True
+            if app.streaming:
+                app.stop_stream()
+        elif was_calibrating:
+            was_calibrating = False
+            app.config = load_config(app.addon)
+            app._maybe_start(app._is_video)
+        if monitor.waitForAbort(0.2):
             break
     app.shutdown()
     _log("service stopped")
@@ -579,6 +602,32 @@ def test_connection():
         xbmcgui.Dialog().notification(title, note, xbmcgui.NOTIFICATION_INFO, 4000)
     except Exception:
         _log(note)
+
+
+def _write_delay(addon, delay_ms):
+    delay_ms = int(delay_ms)
+    try:
+        addon.setSettingInt("sync_delay_ms", delay_ms)
+    except Exception:
+        addon.setSetting("sync_delay_ms", str(delay_ms))
+
+
+def calibrate_sync():
+    """Settings action: white perimeter bar + delayed LED hotspot."""
+    import os
+    import sys
+
+    here = os.path.dirname(os.path.abspath(__file__))
+    if here not in sys.path:
+        sys.path.insert(0, here)
+    import calibrate_ui
+
+    cfg = load_config()
+
+    def on_delay(delay_ms):
+        _write_delay(ADDON, delay_ms)
+
+    calibrate_ui.run_calibration(cfg, on_delay=on_delay)
 
 
 if __name__ == "__main__":

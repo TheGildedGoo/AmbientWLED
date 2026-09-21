@@ -24,7 +24,7 @@
 </addon>
 <addon id="script.module.ambientwled"
        name="AmbientWLED Library"
-       version="0.2.0"
+       version="0.2.1"
        provider-name="Dylan King">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
@@ -43,11 +43,11 @@
 </addon>
 <addon id="script.service.ambientwled"
        name="AmbientWLED"
-       version="0.2.0"
+       version="0.2.1"
        provider-name="Dylan King">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
-    <import addon="script.module.ambientwled" version="0.2.0"/>
+    <import addon="script.module.ambientwled" version="0.2.1"/>
   </requires>
   <extension point="xbmc.service" library="service.py" start="startup"/>
   <extension point="xbmc.python.script" library="run.py"/>
@@ -57,7 +57,7 @@
     <platform>all</platform>
     <license>MIT</license>
     <source>https://github.com/TheGildedGoo/AmbientWLED</source>
-    <news>Picture-to-WLED: DDP RGBW, edge mapper, colour pipe, RenderCapture with Hyperion fallback.</news>
+    <news>Calibrate sync: a white bar walks the screen edge so the sync delay can be matched to the strip.</news>
     <assets>
       <icon>resources/icon.png</icon>
     </assets>
@@ -65,12 +65,12 @@
 </addon>
 <addon id="plugin.program.ambientwled"
        name="AmbientWLED Settings"
-       version="0.2.0"
+       version="0.2.1"
        provider-name="Dylan King">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
-    <import addon="script.module.ambientwled" version="0.2.0"/>
-    <import addon="script.service.ambientwled" version="0.2.0"/>
+    <import addon="script.module.ambientwled" version="0.2.1"/>
+    <import addon="script.service.ambientwled" version="0.2.1"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>executable</provides>

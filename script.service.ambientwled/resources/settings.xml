@@ -240,6 +240,11 @@
           </constraints>
           <control type="slider" format="integer"/>
         </setting>
+        <setting id="calibrate_sync" type="action" label="30228" help="30229">
+          <level>0</level>
+          <data>RunScript(script.service.ambientwled,calibrate_sync)</data>
+          <control type="button" format="action"/>
+        </setting>
       </group>
     </category>
     <category id="capture" label="30300" help="30301">

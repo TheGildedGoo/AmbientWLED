@@ -45,7 +45,7 @@ Seven steps, remote only:
 2. WLED IP, HTTP port, DDP port, **Test connection** (info dialog, then a short edge chase)
 3. RGBW or RGB, LED count (264)
 4. Left / top / right / bottom, with the live sum, start corner, direction, edge depth, and an edge chase
-5. Picture sliders, plus a solid and a rainbow preview
+5. Picture sliders, **Calibrate sync**, plus a solid and a rainbow preview
 6. Video only, capture mode, pause, and what to do if capture fails
 7. Enable the service
 
@@ -61,7 +61,7 @@ You can run the chase in the wizard before capture has ever worked.
 | Edge depth | 10% |
 | Gamma | 2.2 (setting `22`) |
 | Brightness cap | 180 (second cap; see WLED limiter below) |
-| Sync delay | **40 ms** (0–200, step 10). Delays the DDP send, not capture |
+| Sync delay | **40 ms** (0–200, step 10). Delays the DDP send, not capture. **Calibrate sync** matches it to the picture |
 | Capture | **auto**, 25 fps, long edge 96 |
 | Pause | freeze |
 | Video only | on |
@@ -82,6 +82,17 @@ In LED Preferences:
 - 2.4 GHz Wi-Fi is enough for the controller. Ethernet on the AM9 is the better side of the link
 
 Test connection reads `/json/info` and `/json/state`, shows a dialog, then runs a two-second edge chase. Stop, Home, and the screensaver POST `{"live": false}` so WLED can take the strip back.
+
+## Sync calibration
+
+Use this when the strip leads or lags the picture.
+
+1. Open **AmbientWLED Settings** → **Picture** → **Calibrate sync**. The setup wizard's Picture step has the same item.
+2. A white bar walks the edge of the screen, one lap about every 2.5 seconds, in the strip direction (clockwise by default). The same spot is sent to WLED through the sync-delay queue, on the DDP worker.
+3. Press **Left** or **Right** until the white LED moves with the bar. Each click is 10 ms, from 0 to 200, and it is saved immediately. The number on screen is the current delay. A gauge under it shows the same value.
+4. Press **OK** or **Back** when they match. The bar stops, the chase stops, and WLED live override is released.
+
+If the controller does not answer, the bar and the delay control still run, and one notice says the LEDs are not connected. The fake colour cycle under Debug is a separate toggle and stays off.
 
 ## Capture
 

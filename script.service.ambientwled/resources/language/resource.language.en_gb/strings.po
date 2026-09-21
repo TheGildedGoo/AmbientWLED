@@ -269,6 +269,14 @@ msgctxt "#30227"
 msgid "Hold the DDP frame so lights meet the picture. 0–200, step 10. Default 40. Does not delay capture."
 msgstr "Hold the DDP frame so lights meet the picture. 0–200, step 10. Default 40. Does not delay capture."
 
+msgctxt "#30228"
+msgid "Calibrate sync"
+msgstr "Calibrate sync"
+
+msgctxt "#30229"
+msgid "A white bar walks the screen edge. Match it to the strip with Left and Right. The delay is saved as you change it."
+msgstr "A white bar walks the screen edge. Match it to the strip with Left and Right. The delay is saved as you change it."
+
 msgctxt "#30300"
 msgid "Capture"
 msgstr "Capture"

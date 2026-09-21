@@ -183,6 +183,31 @@ class LiveActions(WizardActions):
         frames = rainbow_frames(cfg.output_count(), seconds=2.0, fps=20.0, brightness=cfg.brightness / 255.0)
         run_frames(cfg.wled_host, frames, port=cfg.wled_port, ddp_port=cfg.ddp_port, rgbw=cfg.rgbw)
 
+    def calibrate_sync(self, store, ui):
+        cfg = store.export()
+
+        def on_delay(delay_ms):
+            store.set("sync_delay_ms", int(delay_ms))
+            addon = getattr(store, "addon", None)
+            if addon is not None:
+                _write_setting(addon, "sync_delay_ms", int(delay_ms))
+
+        try:
+            ui_mod = _load_calibrate_ui()
+        except Exception as exc:
+            ui.ok("AmbientWLED", "Calibrate sync is not available (%s)" % exc)
+            return
+        ui_mod.run_calibration(cfg, on_delay=on_delay, notify=ui.notify)
+
+
+def _load_calibrate_ui():
+    path = xbmcaddon.Addon(SERVICE_ID).getAddonInfo("path")
+    if path and path not in sys.path:
+        sys.path.insert(0, path)
+    import calibrate_ui
+
+    return calibrate_ui
+
 
 def open_wizard(addon):
     store = KodiStore(addon)

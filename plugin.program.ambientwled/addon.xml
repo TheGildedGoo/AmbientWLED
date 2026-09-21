@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.program.ambientwled"
        name="AmbientWLED Settings"
-       version="0.2.0"
+       version="0.2.1"
        provider-name="Dylan King">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
-    <import addon="script.module.ambientwled" version="0.2.0"/>
-    <import addon="script.service.ambientwled" version="0.2.0"/>
+    <import addon="script.module.ambientwled" version="0.2.1"/>
+    <import addon="script.service.ambientwled" version="0.2.1"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>executable</provides>
