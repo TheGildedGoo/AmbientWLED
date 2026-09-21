@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.module.ambientwled"
        name="AmbientWLED Library"
-       version="0.1.0"
+       version="0.2.0"
        provider-name="Dylan King">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
   </requires>
   <extension point="xbmc.python.module" library="lib"/>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Shared pure-Python library for AmbientWLED</summary>
-    <description lang="en_GB">WLED JSON helpers, DDP sender, and color utilities used by AmbientWLED service and settings addons. No xbmc imports in the library itself.</description>
+    <summary lang="en_GB">Shared library for AmbientWLED</summary>
+    <description lang="en_GB">WLED JSON, DDP, geometry mapper, colour pipe, and Hyperion client used by AmbientWLED. No xbmc imports in the library itself.</description>
     <platform>all</platform>
     <license>MIT</license>
     <source>https://github.com/TheGildedGoo/AmbientWLED</source>

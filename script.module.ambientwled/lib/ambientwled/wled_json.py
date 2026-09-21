@@ -21,13 +21,16 @@ class WledError(Exception):
 class WledClient:
     """Thin JSON client for a single WLED instance on the LAN."""
 
-    def __init__(self, host: str, timeout: float = 2.0):
+    def __init__(self, host: str, timeout: float = 2.0, port: int = 80):
         host = (host or "").strip()
+        self.timeout = timeout
+        self.port = int(port or 80)
         if host.startswith("http://") or host.startswith("https://"):
             self.base = host.rstrip("/")
+        elif self.port not in (80, 0):
+            self.base = f"http://{host}:{self.port}".rstrip("/")
         else:
             self.base = f"http://{host}".rstrip("/")
-        self.timeout = timeout
 
     def _url(self, path: str) -> str:
         if not path.startswith("/"):
@@ -112,13 +115,18 @@ class WledClient:
         return self._post_json("/json/state", {"live": bool(live)})
 
     def test_connection(self) -> Dict[str, Any]:
-        """Convenience: fetch /json/info and return a small summary dict."""
+        """GET /json/info and /json/state. Returns a small summary dict."""
         info = self.get_info()
+        state = self.get_state()
         leds = info.get("leds") or {}
         return {
             "ok": True,
             "name": info.get("name") or info.get("ver") or "WLED",
             "version": info.get("ver"),
             "led_count": leds.get("count"),
+            "on": state.get("on"),
+            "bri": state.get("bri"),
+            "live": state.get("live"),
             "raw": info,
+            "state": state,
         }
